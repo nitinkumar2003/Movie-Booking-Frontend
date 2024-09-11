@@ -10,8 +10,8 @@ const Header = () => {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     return (
-        <header className="bg-background border-b sticky top-0 z-50">
-            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <header className="bg-background border-b sticky top-0 z-50 h-16"> {/* Fixed height */}
+            <div className="container mx-auto px-4 py-4 flex items-center justify-between h-full">
                 <Link to="/" className="flex items-center space-x-2">
                     <Film className="h-6 w-6" />
                     <span className="text-xl font-bold">MovieMagic</span>
