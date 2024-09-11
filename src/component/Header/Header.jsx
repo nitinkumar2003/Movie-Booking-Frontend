@@ -3,27 +3,23 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/button';
 import { Film, User, Menu, X } from 'lucide-react'; // Import Menu and X icons
+import { $navLinks } from '../../utils/Constant';
 
-const Header = () => {
+const Header = ({ id }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     return (
-        <header className="bg-background border-b sticky top-0 z-50 h-16"> {/* Fixed height */}
+        <header className="bg-white border-b sticky top-0 z-50 h-16"> {/* Fixed height */}
             <div className="container mx-auto px-4 py-4 flex items-center justify-between h-full">
                 <Link to="/" className="flex items-center space-x-2">
                     <Film className="h-6 w-6" />
-                    <span className="text-xl font-bold">MovieMagic</span>
+                    <span className="text-xl font-bold">NK-Movie</span>
                 </Link>
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex space-x-4">
-                    <Link to="/top100" className="text-sm font-medium hover:underline">
-                        Top 100 Movies & Shows
-                    </Link>
-                    <Link to="/book" className="text-sm font-medium hover:underline">
-                        Book Ticket
-                    </Link>
+                    <NavLinks id={id} />
                 </nav>
                 {/* Mobile Menu Button */}
                 <div className="md:hidden">
@@ -47,16 +43,22 @@ const Header = () => {
                     </Button>
                 </div>
                 <nav className="flex flex-col items-center space-y-4 mt-8">
-                    <Link to="/top100" className="text-lg font-medium hover:underline" onClick={toggleMenu}>
-                        Top 100 Movies & Shows
-                    </Link>
-                    <Link to="/book" className="text-lg font-medium hover:underline" onClick={toggleMenu}>
-                        Book Ticket
-                    </Link>
+                    <NavLinks id={id} />
                 </nav>
             </div>
         </header>
     );
 };
+
+
+const NavLinks = ({ id }) => {
+
+    return $navLinks.map((item, index) => {
+        return <>
+            <a to="/top100" className={`text-sm font-medium cursor-pointer ${item.id === id ? 'text-blue-600 underline' : 'text-gray-900 hover:underline'}`}>{item.label}</a>
+        </>
+    })
+}
+
 
 export default Header;

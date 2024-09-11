@@ -8,7 +8,7 @@ import UpcomingMovies from '../component/UpcommingMovie/UpcomingMovies';
 
 const Home = () => {
     return (
-        <Layout>
+        <Layout id='1'>
             <section className="bg-gradient-to-r from-purple-700 to-indigo-800 text-white py-20 flex-grow">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-6xl font-bold mb-6">Experience Movie Magic</h1>

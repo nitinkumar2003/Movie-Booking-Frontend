@@ -1,81 +1,112 @@
-import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
-import Button from "../ui/button";
-import Card from "../ui/Card";
-import CardContent from "../ui/CardContent";
-
-const upcomingMovies = [
-  { id: 1, title: "Interstellar 2", releaseDate: "2024-06-15", imageUrl: "https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300" },
-  { id: 2, title: "The Matrix Resurrections 2", releaseDate: "2024-07-01", imageUrl: "https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300" },
-  { id: 3, title: "Inception: Dream's End", releaseDate: "2024-08-20", imageUrl: "https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300" },
-  { id: 4, title: "Avatar 3", releaseDate: "2024-09-10", imageUrl: "/placeholder.svg?height=400&width=300" },
-  { id: 5, title: "Dune: Part Three", releaseDate: "2024-10-05", imageUrl: "/placeholder.svg?height=400&width=300" },
+import React, { useMemo, useState,useEffect } from 'react';
+import { $services } from '../../utils/Service';
+const movies = [
+  { id: 1, name: 'Interstellar 2', imageSrc: 'https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300', releaseDate: '2024-06-15', genre: 'Sci-fi' },
+  { id: 2, name: 'The Matrix Resurrections 2', imageSrc: 'https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300', releaseDate: '2024-07-01', genre: 'Action' },
+  { id: 3, name: 'Inception: Dream\'s End', imageSrc: 'https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300', releaseDate: '2024-08-20', genre: 'Thriller' },
+  { id: 4, name: 'Avatar 3', imageSrc: '/placeholder.svg', releaseDate: '2024-09-10', genre: 'Fantasy' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  { id: 5, name: 'Dune: Part Three', imageSrc: '/placeholder.svg', releaseDate: '2024-10-05', genre: 'Adventure' },
+  // ... more movies (total 20)
+  // ... more movies (total 20)
 ];
 
-export default function UpcomingMoviesSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function UpcomingMovies() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 4;
+  const totalPages = Math.ceil(movies.length / moviesPerPage);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % upcomingMovies.length);
+
+useEffect(()=>{
+  fetchUpcommingMovie()
+});
+
+const fetchUpcommingMovie=async()=>{
+  const _res=await $services.imdb100Movies('');
+  console.log("_res",_res)
+}
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + upcomingMovies.length) % upcomingMovies.length);
+  const handlePrevPage = () => {
+    console.log("currentPage", currentPage);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
+
+  const displayedMovies = useMemo(() => {
+    console.log("currentPage2", currentPage);
+    return movies.slice((currentPage - 1) * moviesPerPage, currentPage * moviesPerPage);
+  }, [currentPage])
+
+
+  console.log("displayedMovies", displayedMovies)
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">Upcoming Movies</h2>
-      <div className="relative">
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {upcomingMovies.map((movie) => (
-              <Card key={movie.id} className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 p-2 relative group">
-                <CardContent className="transition-transform duration-500 ease-in-out hover:scale-105 hover:rotate-1 hover:shadow-lg relative">
-                  <img
-                    src={movie.imageUrl}
-                    alt={movie.title}
-                    className="w-full h-64 object-cover rounded-md mb-4"
-                  />
-                  <h3 className="font-semibold text-lg mb-2">{movie.title}</h3>
-                  <p className="text-sm text-gray-500">Release Date: {movie.releaseDate}</p>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Upcoming Movies</h2>
 
-                  {/* Motion View Button */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <Button className="bg-white text-black px-4 py-2">View</Button>
-                  </motion.div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+
+          {(displayedMovies.map((movie, index) => {
+            return <>
+              <div key={movie.id} className="group relative">
+                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:h-80">
+                  <img
+                    src={movie.imageSrc}
+                    alt={movie.name}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">{movie.name}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{movie.genre}</p>
+                    <p className="mt-1 text-sm text-gray-500">Release Date: {movie.releaseDate}</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          }))}
+
         </div>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 left-2 transform -translate-y-1/2"
-          onClick={prevSlide}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          <span className="sr-only">Previous</span>
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 right-2 transform -translate-y-1/2"
-          onClick={nextSlide}
-        >
-          <ChevronRight className="h-4 w-4" />
-          <span className="sr-only">Next</span>
-        </Button>
+
+        {/* Pagination Controls */}
+        <div className="mt-8 flex justify-center items-center space-x-4">
+          <button
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-md disabled:opacity-50"
+          >
+            Previous
+          </button>
+
+          <div className="text-lg">
+            Page {currentPage} of {totalPages}
+          </div>
+
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-md disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
