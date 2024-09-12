@@ -19,7 +19,7 @@ const Header = ({ id }) => {
             <div className="container mx-auto px-4 py-4 flex items-center justify-between h-full">
                 <Link to="/" className="flex items-center space-x-2">
                     <Film className="h-6 w-6" />
-                    <span className="text-xl font-bold">NK-Movie</span>
+                    <span className="text-xl font-bold">NK-PVR</span>
                 </Link>
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex space-x-4">
