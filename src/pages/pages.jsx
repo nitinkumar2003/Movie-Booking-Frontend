@@ -1,4 +1,3 @@
-// src/pages/index.js
 import Home from './Home';
 import About from './About';
 import Top100 from './Top-100';

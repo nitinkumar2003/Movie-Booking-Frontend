@@ -30,8 +30,8 @@ useEffect(()=>{
 });
 
 const fetchUpcommingMovie=async()=>{
-  const _res=await $services.imdb100Movies('');
-  console.log("_res",_res)
+  // const _res=await $services.imdb100Movies('');
+  // console.log("_res",_res)
 }
 
   const handleNextPage = () => {

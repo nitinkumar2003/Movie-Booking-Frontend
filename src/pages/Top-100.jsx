@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Pagination from '../component/Pagination/Pagination';
 import Layout from '../component/Layout/Layout';
-
+import { Button } from '../component/ui/Ui';
 // Mock data for demonstration
 const top100Movies = Array.from({ length: 100 }, (_, i) => ({
   title: `Movie ${i + 1}`,
@@ -30,18 +30,13 @@ const Top100Page = () => {
         <h1 className="text-3xl font-bold text-center mb-6">Top 100 Entertainment</h1>
 
         <div className="flex justify-center space-x-4 mb-6">
-          <button
-            onClick={() => setActiveTab('movies')}
-            className={`px-4 py-2 border rounded-lg ${activeTab === 'movies' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}
-          >
+          <Button onClick={() => setActiveTab('movies')} className={`px-4 py-2 border rounded-lg ${activeTab === 'movies' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}>
             Top 100 Movies
-          </button>
-          <button
-            onClick={() => setActiveTab('shows')}
-            className={`px-4 py-2 border rounded-lg ${activeTab === 'shows' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}
-          >
+          </Button>
+          <Button onClick={() => setActiveTab('shows')} className={`px-4 py-2 border rounded-lg ${activeTab === 'shows' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}>
             Top 100 Shows
-          </button>
+          </Button>
+
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

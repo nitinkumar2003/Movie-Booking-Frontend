@@ -12,14 +12,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         const pageNumbers = [];
 
         // Always show the first page
-        pageNumbers.push(1);
-
-        // Show the second page if not the first
-        if (totalPages > 1 && currentPage > 3) {
-            pageNumbers.push(2);
+        if (totalPages > 1) {
+            pageNumbers.push(1);
         }
 
-        // Show the previous page if it exists
+        // Show the previous page if it's not the first page
         if (currentPage > 1) {
             pageNumbers.push(currentPage - 1);
         }
@@ -27,18 +24,18 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         // Always show the current page
         pageNumbers.push(currentPage);
 
-        // Show the next page if it exists
+        // Show the next page if it's not the last page
         if (currentPage < totalPages) {
             pageNumbers.push(currentPage + 1);
         }
 
-        // Always show the last page if not already shown
-        if (totalPages > 2 && currentPage < totalPages - 2) {
+        // Always show the last page if it's not already included
+        if (totalPages > 1 && currentPage < totalPages) {
             pageNumbers.push(totalPages);
         }
 
         // Remove duplicates and sort
-        return Array.from(new Set(pageNumbers)).sort((a, b) => a - b);
+        return Array.from(new Set(pageNumbers));
     };
 
     const pageNumbers = getPageNumbers();
@@ -53,11 +50,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 Previous
             </button>
 
-            {pageNumbers.map((page) => (
+            {pageNumbers.map((page, index) => (
                 <button
-                    key={page}
+                    key={index}
                     onClick={() => handlePageChange(page)}
-                    className={`px-3 py-1 border rounded-lg ${currentPage === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}
+                    className={`px-3 py-1 border rounded-lg ${page === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500'} hover:bg-blue-100`}
                 >
                     {page}
                 </button>
