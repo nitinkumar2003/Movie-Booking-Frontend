@@ -1,5 +1,6 @@
 import React, { useMemo, useState,useEffect } from 'react';
 import { $services } from '../../utils/Service';
+import usePush from '../../hooks/usePush';
 const movies = [
   { id: 1, name: 'Interstellar 2', imageSrc: 'https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300', releaseDate: '2024-06-15', genre: 'Sci-fi' },
   { id: 2, name: 'The Matrix Resurrections 2', imageSrc: 'https://i.postimg.cc/kGyCw8w0/img.jpg?height=400&width=300', releaseDate: '2024-07-01', genre: 'Action' },
@@ -21,6 +22,7 @@ const movies = [
 
 export default function UpcomingMovies() {
   const [currentPage, setCurrentPage] = useState(1);
+  const push=usePush();
   const moviesPerPage = 4;
   const totalPages = Math.ceil(movies.length / moviesPerPage);
 
@@ -30,8 +32,8 @@ useEffect(()=>{
 });
 
 const fetchUpcommingMovie=async()=>{
-  // const _res=await $services.imdb100Movies('');
-  // console.log("_res",_res)
+  const _res=await $services.imdb100Movies('');
+  console.log("_res",_res,JSON.stringify(_res))
 }
 
   const handleNextPage = () => {
@@ -54,6 +56,10 @@ const fetchUpcommingMovie=async()=>{
   }, [currentPage])
 
 
+
+  const handleMovieClick=()=>{
+    
+  }
   console.log("displayedMovies", displayedMovies)
   return (
     <div className="bg-white">
