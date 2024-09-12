@@ -1,7 +1,7 @@
 export const $navLinks = [
-    { label: 'Home', id: '1', url: '/' },
-    { label: 'Top-100', id: '2', url: '/t100' },
-    { label: 'About', id: '3', url: '/about' },
+    { label: 'Home', id: '1', route: '/' },
+    { label: 'Top-100', id: '2', route: '/t100' },
+    { label: 'About', id: '3', route: '/about' },
 ]
 
 

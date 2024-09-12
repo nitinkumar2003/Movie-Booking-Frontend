@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Film, User, Menu, X } from 'lucide-react'; // Import Menu and X icons
 import { $navLinks } from '../../utils/Constant';
-import {Button} from '../ui/Ui'
+import { Button } from '../ui/Ui'
+import { useNavigateTo, usePush } from '../../hooks/CustomHooks';
 
 const Header = ({ id }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    // const handleNavigateTo=useNavigateTo()
+   
     const toggleMenu = () => setMenuOpen(!menuOpen);
+
+    
 
     return (
         <header className="bg-white border-b sticky top-0 z-50 h-16"> {/* Fixed height */}
@@ -52,10 +56,11 @@ const Header = ({ id }) => {
 
 
 const NavLinks = ({ id }) => {
+    const push = usePush()
 
     return $navLinks.map((item, index) => {
         return <>
-            <a to="/top100" className={`text-sm font-medium cursor-pointer ${item.id === id ? 'text-blue-600 underline' : 'text-gray-900 hover:underline'}`}>{item.label}</a>
+            <a to="/top100" onClick={()=>push(item.route)} className={`text-sm font-medium cursor-pointer ${item.id === id ? 'text-blue-600 underline' : 'text-gray-900 hover:underline'}`}>{item.label}</a>
         </>
     })
 }
