@@ -1,8 +1,7 @@
 // src/pages/Home.js
 import React from 'react';
 import Layout from '../component/Layout/Layout';
-import Button from '../component/ui/button';
-import Input from '../component/ui/input';
+import {Button,Input} from '../component/ui/Ui';
 import { Ticket } from 'lucide-react';
 import UpcomingMovies from '../component/UpcommingMovie/UpcomingMovies';
 

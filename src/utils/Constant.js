@@ -1,8 +1,11 @@
 export const $navLinks = [
     { label: 'Home', id: '1', url: '/' },
-    { label: 'Top-100', id: '2', url: 't100' },
-    { label: 'About', id: '3', url: 'about' },
+    { label: 'Top-100', id: '2', url: '/t100' },
+    { label: 'About', id: '3', url: '/about' },
 ]
+
+
+
 
 
 // const navItems = [

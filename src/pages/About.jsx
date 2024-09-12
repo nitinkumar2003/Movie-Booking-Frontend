@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Top100 = () => {
+const About = () => {
   return (
     <>
-      Top100
+      About
     </>
   )
 }
 
-export default Top100
+export default About

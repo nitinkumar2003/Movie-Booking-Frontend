@@ -1,9 +1,9 @@
 // src/components/Header.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../ui/button';
 import { Film, User, Menu, X } from 'lucide-react'; // Import Menu and X icons
 import { $navLinks } from '../../utils/Constant';
+import {Button} from '../ui/Ui'
 
 const Header = ({ id }) => {
     const [menuOpen, setMenuOpen] = useState(false);
