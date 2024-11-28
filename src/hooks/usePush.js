@@ -7,5 +7,4 @@ const usePush = () => {
     }
     return push;
 }
-
 export default usePush;
