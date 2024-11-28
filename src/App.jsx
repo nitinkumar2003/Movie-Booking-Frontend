@@ -14,7 +14,6 @@ function App() {
 
   return (
     <>
-
     <MovieStreamingSite />
       {/* <Routes>
         <Route path='/' element={<Home />} />
